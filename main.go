@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "github.com/rtanwar/bee_test1/routers"
 	"github.com/astaxie/beego"
+	_ "github.com/rtanwar/bee_test/routers"
 )
 
 func main() {
+	// beego.SetStaticPath("/static", "public")
 	beego.Run()
 }
-
