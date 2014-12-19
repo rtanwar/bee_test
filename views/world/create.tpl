@@ -1,0 +1,1 @@
+D:\gosrc\src\github.com\rtanwar\bee_test/views/world/create.tpl

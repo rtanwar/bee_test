@@ -8,12 +8,8 @@
 
       <link rel="stylesheet" href="/static/css/font-awesome.css" />
       <link rel="stylesheet" href="/static/css/style.css" />
-
-      <script src="/staticjs/jquery-1.10.2.min.js"></script>
-      <!-- added for 386 effect
-      <script src="<?php echo base_url(); ?>js/bootstrap-386.js"></script>-->
-
-      <script src="/static/js/bootstrap.min.js"></script>
+      
+      
 
 
       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -32,7 +28,7 @@
           <div class="modal-header">              
               <h1 class="text-center">Login</h1>
             </div>
-            <div class="modal-body">
+            <div class="modal-body">            
               <form action="" method="post" class="form col-md-12 center-block">
                 <div class="input-group">
                   <span class="input-group-addon glyphicon glyphicon-user"></span>
@@ -49,7 +45,7 @@
               </form>
             </div>
             <div class="modal-footer">
-
+            Hellow {{.identity}}
             </div>
           </div>
         </div>
