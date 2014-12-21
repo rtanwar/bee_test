@@ -22,3 +22,12 @@ func (c *MainController) Get() {
 	c.Data["user"] = v
 	c.TplNames = "index.tpl"
 }
+
+// var sessionName = beego.AppConfig.String("SessionName")
+
+// var FilterUser = func(ctx *context.Context) {
+// 	_, ok := ctx.Input.Session(sessionName).(int)
+// 	if !ok && ctx.Input.Uri() != "/login" && ctx.Input.Uri() != "/register" {
+// 		ctx.Redirect(302, "/login")
+// 	}
+// }

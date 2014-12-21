@@ -32,7 +32,7 @@ func (c *LoginController) Post() {
 }
 
 func init() {
-	v := this.GetSession("user")
-	fmt.Printf("From Login init session[user]=%+v\n", v)
+	// v := this.GetSession("user")
+	// fmt.Printf("From Login init session[user]=%+v\n", v)
 
 }
