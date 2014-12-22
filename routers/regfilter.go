@@ -17,6 +17,7 @@ var sessionName = beego.AppConfig.String("SessionName")
 var FilterUser = func(ctx *context.Context) {
 	v := ctx.Input.Session(sessionName)
 	fmt.Print("Session %s", v)
+	beego.Info("Session %s", v)
 	// var lowerUrl string = strings.ToLower(ctx.Request.RequestURI)
 	// if userId == 0 && strings.Contains(lowerUrl, "/admin") {
 	// 	if !noCheckUrl(lowerUrl) {

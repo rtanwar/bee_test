@@ -5,6 +5,11 @@ import (
 	"github.com/astaxie/beego"
 )
 
+type User struct {
+	name string
+	id   int
+}
+
 type MainController struct {
 	beego.Controller
 }
