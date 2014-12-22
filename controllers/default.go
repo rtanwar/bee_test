@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
+	"github.com/rtanwar/bee_test/models"
 )
 
 type User struct {
@@ -17,7 +18,6 @@ type MainController struct {
 var sessionName = beego.AppConfig.String("SessionName")
 
 func (c *MainController) Get() {
-
 	v := c.GetSession(sessionName)
 	fmt.Printf("Session %s", v)
 	if v == nil {
@@ -25,7 +25,8 @@ func (c *MainController) Get() {
 		// this.SetSession("asta", int(1))
 		// this.Data["num"] = 0
 	}
-
+	c.Data["Countries"] = models.GetAllCountry()
+	fmt.Println(c.Data["Countries"])
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
 	c.Data["user"] = v

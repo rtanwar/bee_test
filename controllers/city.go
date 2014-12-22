@@ -3,7 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/rtanwar/testapp/models"
+	"github.com/rtanwar/bee_test/models"
 	"strconv"
 	"strings"
 
