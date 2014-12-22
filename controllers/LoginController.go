@@ -17,6 +17,7 @@ func (c *LoginController) Get() {
 }
 
 func (c *LoginController) Post() {
+	var sessionName = beego.AppConfig.String("SessionName")
 	identity := c.GetString("identity")
 	password := c.GetString("password")
 
@@ -25,7 +26,10 @@ func (c *LoginController) Post() {
 	c.Data["identity"] = identity
 	c.Data["password"] = password
 
-	fmt.Println("identity" + identity)
+	fmt.Printf("Login POST %s %s", identity, password)
+	if (identity == "demo") && (password == "demo") {
+		c.SetSession(sessionName, 123456)
+	}
 
 	c.TplNames = "auth/login.tpl"
 	// this.Ctx.Redirect(302, "/admin/index")

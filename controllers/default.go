@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 )
 
@@ -8,9 +9,12 @@ type MainController struct {
 	beego.Controller
 }
 
+var sessionName = beego.AppConfig.String("SessionName")
+
 func (c *MainController) Get() {
 
-	v := c.GetSession("user")
+	v := c.GetSession(sessionName)
+	fmt.Printf("Session %s", v)
 	if v == nil {
 		c.Ctx.Redirect(302, "/login")
 		// this.SetSession("asta", int(1))
