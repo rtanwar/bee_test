@@ -13,7 +13,7 @@ func init() {
 	beego.Router("/login", &controllers.LoginController{}, "get:Get;post:Post")
 	// beego.InsertFilter("/*", beego.BeforeRouter, controllers.FilterUser)
 	// beego.InsertFilter("*", beego.BeforeRouter, auth.Basic("username", "secretpassword"))
-	beego.InsertFilter("/user/:id([0-9]+)", beego.BeforeRouter, FilterUser)
+	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser)
 
 	// beego.AutoRouter(&controllers.LoginController{})
 }

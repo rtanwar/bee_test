@@ -4,6 +4,8 @@ package routers
 CMS 过滤器
 */
 import (
+	"fmt"
+	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
 	"strings"
 )
@@ -11,8 +13,11 @@ import (
 /*
 过滤器
 */
+var sessionName = beego.AppConfig.String("SessionName")
 var FilterUser = func(ctx *context.Context) {
 	userId := 1
+	v := ctx.Input.Session(sessionName)
+	fmt.Print(v)
 	var lowerUrl string = strings.ToLower(ctx.Request.RequestURI)
 	if userId == 0 && strings.Contains(lowerUrl, "/admin") {
 		if !noCheckUrl(lowerUrl) {
