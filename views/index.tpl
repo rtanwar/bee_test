@@ -75,6 +75,15 @@
 			    	Contact me: {{.Email}}
 			    </p>
 			    Here is <a href="/logout">Logout</a>
+			    <br/>
+			    Countries:
+
+			    {{range $key, $val := .Countries}}
+			    {{$key}}
+			    {{$val}}
+			    {{end}}
+
+
 			  </div>
 			</div>
 			</div>
