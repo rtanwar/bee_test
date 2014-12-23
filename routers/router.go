@@ -7,7 +7,8 @@ import (
 )
 
 func init() {
-	beego.Router("/", &controllers.MainController{})
+	beego.Router("/", &controllers.CountryController{}, "get:Get_countries")
+	beego.Router("/country/:id:string", &controllers.CountryController{}, "get:Get_country")
 	// beego.Router("/login", &controllers.LoginController{})
 	// beego.Router("/login", &controllers.LoginController{}, "get:Get;post:Post")
 	beego.Router("/login", &controllers.LoginController{}, "get:Get;post:Post")
@@ -17,6 +18,7 @@ func init() {
 
 	// beego.InsertFilter("*", beego.BeforeRouter, auth.Basic("username", "secretpassword"))
 	beego.InsertFilter("/*", beego.BeforeRouter, FilterUser) //working
+	beego.InsertFilter("/", beego.BeforeRouter, FilterUser)  //working
 
 	// beego.AutoRouter(&controllers.LoginController{})
 }

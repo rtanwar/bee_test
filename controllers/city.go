@@ -3,11 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	"github.com/astaxie/beego"
 	"github.com/rtanwar/bee_test/models"
 	"strconv"
 	"strings"
-
-	"github.com/astaxie/beego"
 )
 
 // oprations for City

@@ -69,22 +69,14 @@
 			    <h1>Welcome {{.user}}! to Beego!</h1>
 			    <p class="description">
 			    	Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
-			    <br />
-			    	Official website: <a href="http://{{.Website}}">{{.Website}}</a>
-			    <br />
-			    	Contact me: {{.Email}}
-			    </p>
-			    Here is <a href="/logout">Logout</a>
+			    
+			    Here is <a href="/">Main Page</a>
 			    <br/>
-			    Countries:
-
-			    {{range $key, $val := .Countries}}
-			    <h3><a href= "/country/{{$val.Id}}" >{{$val.Name}}</a></h3>
-			    {{$key}}
-			    {{$val}}
-			    {{end}}
-
-
+			    <h4>Countries details:</h4>
+			    <h3>Name: {{.country.Name}}</h3>
+				Continent: {{.country.Continent}}
+				<br/> Region:{{.country.Region}}
+				<br/> Population:{{.country.Population}}
 			  </div>
 			</div>
 			</div>

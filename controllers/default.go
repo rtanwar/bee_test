@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"fmt"
+	_ "fmt"
 	"github.com/astaxie/beego"
 	"github.com/rtanwar/bee_test/models"
 )
@@ -13,23 +13,28 @@ type User struct {
 
 type MainController struct {
 	beego.Controller
+	user interface{}
+}
+
+func init() {
+
 }
 
 var sessionName = beego.AppConfig.String("SessionName")
 
 func (c *MainController) Get() {
-	v := c.GetSession(sessionName)
-	fmt.Printf("Session %s", v)
-	if v == nil {
-		c.Ctx.Redirect(302, "/login")
-		// this.SetSession("asta", int(1))
-		// this.Data["num"] = 0
-	}
+	c.user = c.GetSession(sessionName)
+	// fmt.Printf("Session %s", v)
+	// if v == nil {
+	// 	c.Ctx.Redirect(302, "/login")
+	// 	// this.SetSession("asta", int(1))
+	// 	// this.Data["num"] = 0
+	// }
 	c.Data["Countries"], _ = models.GetAllCountry()
-	fmt.Println(c.Data["Countries"])
+	// fmt.Println(c.Data["Countries"])
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
-	c.Data["user"] = v
+	c.Data["user"] = c.user
 	c.TplNames = "index.tpl"
 }
 

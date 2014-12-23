@@ -2,16 +2,16 @@ package models
 
 import (
 	_ "errors"
-	_ "fmt"
+	"fmt"
 	_ "reflect"
 	_ "strings"
 
-	"github.com/astaxie/beego"
+	_ "github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
 
 type Country struct {
-	Id             int     `orm:"column(Code);pk"`
+	Id             string  `orm:"column(Code);pk"`
 	Name           string  `orm:"column(Name);size(52)"`
 	Continent      string  `orm:"column(Continent)"`
 	Region         string  `orm:"column(Region);size(26)"`
@@ -34,29 +34,50 @@ func init() {
 
 // GetAllCountry retrieves all Country matches certain condition. Returns empty list if
 // no records exist
-func GetAllCountry() ([]*Country, string) {
+func GetAllCountry() ([]*Country, error) {
 	o := orm.NewOrm()
 	o.Using("default")
 
-	var count int
-	o.Raw("select count(*) as Count from Country").QueryRow(&count)
-	beego.Info(count)
+	// var count int
+	// o.Raw("select count(*) as Count from Country").QueryRow(&count)
+	// beego.Info(count)
+
+	// err := o.QueryTable("Country").All(&country)
+
+	//working code
 	var country []*Country
 	// num, err := o.QueryTable("Country").All(&country)
-	num, err := o.QueryTable(country).All(&country)
 
-	beego.Info(err)
-	beego.Info(num)
-	if err != orm.ErrNoRows && num > 0 {
-		return country, ""
-	}
-	return country, "ERR"
+	// fmt.Printf("Returned Rows Num: %s, %s", num, err)
 
+	// beego.Info(qs)
+	c := new(Country)
+	num, err := o.QueryTable(c).All(&country) // return a QuerySetter
+	fmt.Printf("Returned Rows Num: %s, %s", num, err)
+	// fmt.Printf("qs %s", qs)
+	// beego.Info(qs)
+	// beego.Info(err)
+	// beego.Info(num)
+	// if err != orm.ErrNoRows && num > 0 {
+	// 	return country, ""
+	// }
+	return country, err
 	// qs := o.QueryTable(new(Country))
-
 	// m := make(map[int]interface{})
 	// m[0] = "india"
 	// return
+}
+func GetCountry(countryId string) (c *Country, err error) {
+	o := orm.NewOrm()
+	o.Using("default")
+	// c := new(Country)
+	c = &Country{Id: countryId}
+	fmt.Printf("GetCountry %s", countryId)
+	// err := o.QueryTable(c).One(&c) // return a QuerySetter
+	// return c, err
+	err = o.Read(c)
+	return c, nil
+
 }
 
 // // AddCountry insert a new Country into database and returns
