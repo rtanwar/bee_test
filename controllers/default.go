@@ -25,7 +25,7 @@ func (c *MainController) Get() {
 		// this.SetSession("asta", int(1))
 		// this.Data["num"] = 0
 	}
-	c.Data["Countries"] = models.GetAllCountry()
+	c.Data["Countries"], _ = models.GetAllCountry()
 	fmt.Println(c.Data["Countries"])
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
