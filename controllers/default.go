@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	_ "fmt"
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/rtanwar/bee_test/models"
 )
@@ -16,14 +16,15 @@ type MainController struct {
 	user interface{}
 }
 
-func init() {
-
+func (c *MainController) Prepare() {
+	fmt.Println("CINTROLLER PREPARE")
+	c.user = c.GetSession(sessionName)
 }
 
 var sessionName = beego.AppConfig.String("SessionName")
 
 func (c *MainController) Get() {
-	c.user = c.GetSession(sessionName)
+
 	// fmt.Printf("Session %s", v)
 	// if v == nil {
 	// 	c.Ctx.Redirect(302, "/login")

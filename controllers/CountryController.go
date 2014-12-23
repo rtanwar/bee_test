@@ -22,7 +22,7 @@ func (c *CountryController) Get_countries() {
 	// fmt.Println(c.Data["Countries"])
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
-	c.Data["user"] = UserName
+	c.Data["user"] = c.user
 	c.TplNames = "index.tpl"
 }
 
@@ -33,6 +33,6 @@ func (c *CountryController) Get_country() {
 	if country != "" {
 
 		c.Data["country"], _ = models.GetCountry(country)
-		c.Data["user"] = UserName
+		c.Data["user"] = c.user
 	}
 }

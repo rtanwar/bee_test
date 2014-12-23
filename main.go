@@ -8,6 +8,7 @@ import (
 )
 
 func init() {
+	orm.Debug = true
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
 	orm.RegisterDataBase("default", "mysql", "root:@/world")
 	// orm.RegisterDataBase("default", "mysql", "root:@tcp(127.0.0.1:3306)/world")

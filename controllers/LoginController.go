@@ -9,12 +9,10 @@ type LoginController struct {
 	beego.Controller
 }
 
-var UserName interface{}
-
 func (c *LoginController) Get() {
 	// c.Data["Website"] = "beego.me"
 	// c.Data["Email"] = "astaxie@gmail.com"
-	UserName = c.GetSession(sessionName)
+	UserName := c.GetSession(sessionName)
 	fmt.Printf("User%s", UserName)
 	if UserName != nil {
 		c.Ctx.Redirect(302, "/")
@@ -37,7 +35,7 @@ func (c *LoginController) Post() {
 	fmt.Printf("Login POST %s %s", identity, password)
 	if (identity == "demo") && (password == "demo") {
 		c.SetSession(sessionName, identity)
-		UserName = identity
+		// UserName = identity
 		c.Ctx.Redirect(302, "/")
 	}
 	c.TplNames = "auth/login.tpl"
