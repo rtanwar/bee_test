@@ -34,7 +34,13 @@ func (c *LoginController) Post() {
 
 	fmt.Printf("Login POST %s %s", identity, password)
 	if (identity == "demo") && (password == "demo") {
-		c.SetSession(sessionName, identity)
+		m := make(map[string]interface{})
+		//   	m["company"] = a.Company
+		m["user"] = identity
+		//   	m["timestamp"] = time.Now()
+		//   	c.SetSession("foo", m)
+		// c.SetSession(sessionName, identity)
+		c.SetSession(sessionName, m)
 		// UserName = identity
 		c.Ctx.Redirect(302, "/")
 	}

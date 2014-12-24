@@ -36,3 +36,8 @@ func (c *CountryController) Get_country() {
 		c.Data["user"] = c.user
 	}
 }
+
+func (c *CountryController) Get_countries_json() {
+	c.Data["json"], _ = models.GetAllCountry()
+	c.ServeJson()
+}
