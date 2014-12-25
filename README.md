@@ -9,8 +9,11 @@ Problem
     - Give option to logout on main page.
 * 
 * display form
+* use session for login
+* validate formdata
+* pass parameter to DB
 * display result based on form value
-* display JSON through REST
+* display JSON result
 * display static page with JS& CSS
 * use Angular
 * 
