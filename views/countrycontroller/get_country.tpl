@@ -66,17 +66,19 @@
 			<div class="container">
 			<div class="row">
 			  <div class="hero-text">
-			    <h1>Welcome {{.user}}! to Beego!</h1>
+			    <h1>Welcome {{.user}}! on details page!</h1>
 			    <p class="description">
 			    	Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
 			    
 			    Here is <a href="/">Main Page</a>
 			    <br/>
-			    <h4>Countries details:</h4>
-			    <h3>Name: {{.country.Name}}</h3>
-				Continent: {{.country.Continent}}
-				<br/> Region:{{.country.Region}}
-				<br/> Population:{{.country.Population}}
+			    <table border=1>
+			    <caption><h4>Country details:</h4></caption>
+			    <tr><td>Name:</td><td>Name: {{.country.Name}}</td></tr>
+				<tr><td>Continent: </td><td>{{.country.Continent}}</td></tr>
+				<tr><td>Region:</td><td>{{.country.Region}}</td></tr>
+				<tr><td>Population:</td><td>{{.country.Population}}</td></tr>
+				</table>
 			  </div>
 			</div>
 			</div>

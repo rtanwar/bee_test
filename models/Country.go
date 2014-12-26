@@ -28,6 +28,10 @@ type Country struct {
 	Code2          string  `orm:"column(Code2);size(2)"`
 }
 
+func (c *Country) TableName() string {
+	return "Country"
+}
+
 func init() {
 	orm.RegisterModel(new(Country))
 }
@@ -67,6 +71,7 @@ func GetAllCountry() ([]*Country, error) {
 	// m[0] = "india"
 	// return
 }
+
 func GetCountry(countryId string) (c *Country, err error) {
 	o := orm.NewOrm()
 	o.Using("default")

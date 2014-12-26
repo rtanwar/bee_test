@@ -11,7 +11,7 @@ import (
 )
 
 // oprations for Country
-type CountryController struct {
+type CountryController1 struct {
 	beego.Controller
 }
 

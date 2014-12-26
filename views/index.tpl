@@ -2,7 +2,7 @@
 
 <html>
   	<head>
-    	<title>Beego</title>
+    	<title>Beego Test Application</title>
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 		<style type="text/css">
@@ -66,7 +66,7 @@
 			<div class="container">
 			<div class="row">
 			  <div class="hero-text">
-			    <h1>Welcome {{.user}}! to Beego!</h1>
+			    <h1>Welcome {{.user}}! to Beego Sample Application.</h1>
 			    <p class="description">
 			    	Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
 			    <br />
