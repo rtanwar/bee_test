@@ -38,7 +38,7 @@ func init() {
 
 // GetAllCountry retrieves all Country matches certain condition. Returns empty list if
 // no records exist
-func GetAllCountry() ([]*Country, error) {
+func GetAllCountry(search string) ([]*Country, error) {
 	o := orm.NewOrm()
 	o.Using("default")
 
@@ -56,7 +56,8 @@ func GetAllCountry() ([]*Country, error) {
 
 	// beego.Info(qs)
 	c := new(Country)
-	num, err := o.QueryTable(c).All(&country) // return a QuerySetter
+	num, err := o.QueryTable(c).Filter("Name__contains",search).All(&country) // return a QuerySetter
+        //qs.Filter("name__contains", "slene")
 	fmt.Printf("Returned Rows Num: %s, %s", num, err)
 	// fmt.Printf("qs %s", qs)
 	// beego.Info(qs)

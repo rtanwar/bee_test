@@ -18,10 +18,13 @@ func (c *CountryController) Get_countries() {
 	// 	// this.SetSession("asta", int(1))
 	// 	// this.Data["num"] = 0
 	// }
-	c.Data["Countries"], _ = models.GetAllCountry()
+	country := c.GetString("country")
+	c.Data["Countries"], _ = models.GetAllCountry(country)
 	// fmt.Println(c.Data["Countries"])
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
+	c.Data["country"] = country
+
 	c.Data["user"] = c.user
 	c.TplNames = "index.tpl"
 }
@@ -38,6 +41,7 @@ func (c *CountryController) Get_country() {
 }
 
 func (c *CountryController) Get_countries_json() {
-	c.Data["json"], _ = models.GetAllCountry()
+	country := ""
+	c.Data["json"], _ = models.GetAllCountry(country)
 	c.ServeJson()
 }

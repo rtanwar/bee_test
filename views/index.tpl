@@ -76,6 +76,11 @@
 			    </p>
 			    Here is <a href="/logout">Logout</a>
 			    <br/>
+			    <form action="/" METHOD="POST">
+			    Search Country: <input name="country" value=""/>
+			    <input type="submit"/>
+			    </form>
+			    Searching {{.country}}
 			    Countries:
 
 			    {{range $key, $val := .Countries}}
