@@ -4,6 +4,7 @@ import (
 	"fmt"
 	_ "github.com/astaxie/beego"
 	"github.com/rtanwar/bee_test/models"
+	"strings"
 )
 
 type CountryController struct {
@@ -44,15 +45,28 @@ func (c *CountryController) Get_country() {
 
 func (c *CountryController) Get_countries_json() {
 	country := c.Ctx.Input.Param(":id")
+
 	fmt.Printf("Country Controller %s", country)
+	c.Data["user"] = c.user
 	// country := c.GetString("id")
+	var cdetail interface{}
+	var err error
 	if country != "" {
-		cdetail, err := models.GetCountry(country)
+
+		if strings.ToUpper(country) == "ALL" {
+			fmt.Println("ALL DATA")
+			cdetail, err = models.GetAllCountry("")
+		} else {
+			cdetail, err = models.GetCountry(country)
+		}
 		if err == nil {
 			c.Data["json"] = cdetail
+		} else {
+			c.Data["json"] = "{}"
 		}
 		c.ServeJson()
 	}
+
 	// country := ""
 	// var err error
 	// c.Data["json"], err = models.GetAllCountry(country)
