@@ -7,6 +7,7 @@ Problem
 * Display Login form on first visit 
     - Check if logged in else redirect to login page
     - Give option to logout on main page.
+
 $git clone https://www.github.com/rtanwar/bee_test.git
 #service mysqld start
 $mysql -u root -p 
