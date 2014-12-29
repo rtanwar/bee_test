@@ -34,14 +34,31 @@ func (c *CountryController) Get_country() {
 	fmt.Printf("Country Controller %s", country)
 	// country := c.GetString("id")
 	if country != "" {
-
-		c.Data["country"], _ = models.GetCountry(country)
+		cdetail, err := models.GetCountry(country)
+		if err == nil {
+			c.Data["country"] = cdetail
+		}
 		c.Data["user"] = c.user
 	}
 }
 
 func (c *CountryController) Get_countries_json() {
-	country := ""
-	c.Data["json"], _ = models.GetAllCountry(country)
-	c.ServeJson()
+	country := c.Ctx.Input.Param(":id")
+	fmt.Printf("Country Controller %s", country)
+	// country := c.GetString("id")
+	if country != "" {
+		cdetail, err := models.GetCountry(country)
+		if err == nil {
+			c.Data["json"] = cdetail
+		}
+		c.ServeJson()
+	}
+	// country := ""
+	// var err error
+	// c.Data["json"], err = models.GetAllCountry(country)
+	// if err != nil {
+
+	// } else {
+	// 	c.ServeJson()
+	// }
 }

@@ -56,8 +56,8 @@ func GetAllCountry(search string) ([]*Country, error) {
 
 	// beego.Info(qs)
 	c := new(Country)
-	num, err := o.QueryTable(c).Filter("Name__contains",search).All(&country) // return a QuerySetter
-        //qs.Filter("name__contains", "slene")
+	num, err := o.QueryTable(c).Filter("Name__icontains", search).All(&country) // return a QuerySetter
+	//qs.Filter("name__contains", "slene")
 	fmt.Printf("Returned Rows Num: %s, %s", num, err)
 	// fmt.Printf("qs %s", qs)
 	// beego.Info(qs)
@@ -82,7 +82,10 @@ func GetCountry(countryId string) (c *Country, err error) {
 	// err := o.QueryTable(c).One(&c) // return a QuerySetter
 	// return c, err
 	err = o.Read(c)
-	return c, nil
+	if err == orm.ErrNoRows {
+		fmt.Println("No result found.")
+	}
+	return c, err
 
 }
 

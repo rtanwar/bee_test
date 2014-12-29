@@ -72,13 +72,17 @@
 			    
 			    Here is <a href="/">Main Page</a>
 			    <br/>
-			    <table border=1>
+			    {{ if .country}}
+			    <table border=1>			    
 			    <caption><h4>Country details:</h4></caption>
 			    <tr><td>Name:</td><td>Name: {{.country.Name}}</td></tr>
 				<tr><td>Continent: </td><td>{{.country.Continent}}</td></tr>
 				<tr><td>Region:</td><td>{{.country.Region}}</td></tr>
 				<tr><td>Population:</td><td>{{.country.Population}}</td></tr>
 				</table>
+				{{ else }}
+					No Data Found! Please check code.
+				{{ end }}
 			  </div>
 			</div>
 			</div>
