@@ -38,8 +38,15 @@ func init() {
 
 func SaveCountry(new_c Country) int64 {
 	o := orm.NewOrm()
-	if num, err := o.Update(&new_c); err == nil {
+	var num int64
+	var err error
+	if num, err = o.Update(&new_c); err == nil && num > 0 {
 		return num
+	}
+	if num == 0 {
+		if num, err = o.Insert(&new_c); err == nil {
+			return num
+		}
 	}
 	return 0
 }

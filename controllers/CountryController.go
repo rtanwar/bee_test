@@ -54,13 +54,14 @@ func (c *CountryController) Get_countries_json() {
 	// country := c.GetString("id")
 
 	if c.Ctx.Input.IsPost() {
-
 		// jsoninfo := c.GetString("jsoninfo")
 		// fmt.Printf("JSON %s", c.Ctx.Input.CopyBody())
 		new_c := models.Country{}
 		json.Unmarshal(c.Ctx.Input.CopyBody(), &new_c)
 		fmt.Printf("Struct %s", new_c)
 		models.SaveCountry(new_c)
+		c.Data["json"] = ""
+		c.ServeJson()
 		// 	v := Country{Id: m.Id}
 		//
 	} else {

@@ -21,6 +21,9 @@
 	<header class="hero-unit" style="color:black;background-color:#A9F16C">
 		<div ng-app="countryApp" class="container"> 
 			<script type="text/ng-template" id="list.html">
+				<div class="controls">          
+						<button id="button4id" data-loading-text="Loading..." ng-click="add_new()" name="button4id" class="btn btn-success">Add New</button>
+				</div>
 				<table class="table table-striped">					
 					<thead>
 						<tr>
@@ -48,7 +51,7 @@
 							<div class="form-group">              
 								<label class="col-sm-2 control-label" for ="Id">Id</label>
 								<div class="col-sm-3 ">
-									<input readonly="readonly" id="Id" name="Id" size=30 ng-model="country.Id"  class="form-control input-sm">              
+									<input  id="Id" name="Id" size=30 ng-model="country.Id"  class="form-control input-sm">              
 								</div>
 								<label class="col-sm-2 control-label" for ="name">Name</label>
 								<div class="col-sm-3 ">

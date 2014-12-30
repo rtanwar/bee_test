@@ -58,7 +58,9 @@ countryController = countryApp.controller('countryController',function($scope,$h
 	
 	//$scope.insurers=data.data;	
 	//if (data.recordcount) {$scope.recordcount=data.recordcount; $scope.numpages = $scope.recordcount/10};		
-	
+$scope.add_new = function(){
+			$location.path('/add')
+		}	
 	$scope.fetchResult = function () {
 		$scope.showloading = true;
 		$scope.insurers= {};
@@ -159,19 +161,20 @@ countryEditController = countryApp.controller('countryEditController',function($
 		// delete  $scope.bill.address;
 		// delete  $scope.bill.code;
 		console.log("Saving "+$scope.country.Id)	
-		if ($scope.country.Id)
-		{		
-			$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }];
-				$location.path('/')
-			});
-		}
-		else
+		// if ($scope.country.Id)
+		// {		
+		// 	$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }];
+		// 		$location.path('/')
+		// 	});
+		// }
+		// else
 			//baseNames.post($scope.insurer).then(function(){$location.path('/')});
 		Restangular.all('json').post($scope.country).then(function(data){
 			$scope.country.id = data;
 			console.log(data);
 			$scope.alerts=[{ type: 'success', msg: 'Record Added!!' }];									
-			$location.path('/edit/'+$scope.country.id);				      				
+			// $location.path('/edit/'+$scope.country.id);				      				
+			$location.path('/');				      				
 		});
 	}
 	else
