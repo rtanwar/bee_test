@@ -1,7 +1,7 @@
 <HTML lang="en">
   <BODY>
     <head>
-      <title>{{ .title }}</title>
+      <title><<< .title >>></title>
       <link rel="stylesheet" href="/static/css/bootstrap.css">
       <!-- added for 386 effect
       <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.386.css"> -->
@@ -45,7 +45,7 @@
               </form>
             </div>
             <div class="modal-footer">
-            Hellow {{.identity}}
+            Hellow <<<.identity>>>
             </div>
           </div>
         </div>

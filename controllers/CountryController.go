@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	_ "github.com/astaxie/beego"
 	"github.com/rtanwar/bee_test/models"
@@ -44,27 +45,38 @@ func (c *CountryController) Get_country() {
 }
 
 func (c *CountryController) Get_countries_json() {
-	country := c.Ctx.Input.Param(":id")
 
+	country := c.Ctx.Input.Param(":id")
 	fmt.Printf("Country Controller %s", country)
 	c.Data["user"] = c.user
-	// country := c.GetString("id")
-	var cdetail interface{}
+	c.Data["json"] = "{}"
 	var err error
-	if country != "" {
+	// country := c.GetString("id")
 
-		if strings.ToUpper(country) == "ALL" {
-			fmt.Println("ALL DATA")
-			cdetail, err = models.GetAllCountry("")
-		} else {
-			cdetail, err = models.GetCountry(country)
+	if c.Ctx.Input.IsPost() {
+
+		// jsoninfo := c.GetString("jsoninfo")
+		// fmt.Printf("JSON %s", c.Ctx.Input.CopyBody())
+		new_c := models.Country{}
+		json.Unmarshal(c.Ctx.Input.CopyBody(), &new_c)
+		fmt.Printf("Struct %s", new_c)
+		models.SaveCountry(new_c)
+		// 	v := Country{Id: m.Id}
+		//
+	} else {
+		var cdetail interface{}
+		if country != "" {
+			if strings.ToUpper(country) == "ALL" {
+				fmt.Println("ALL DATA")
+				cdetail, err = models.GetAllCountry("")
+			} else {
+				cdetail, err = models.GetCountry(country)
+			}
+			if err == nil {
+				c.Data["json"] = cdetail
+			}
+			c.ServeJson()
 		}
-		if err == nil {
-			c.Data["json"] = cdetail
-		} else {
-			c.Data["json"] = "{}"
-		}
-		c.ServeJson()
 	}
 
 	// country := ""

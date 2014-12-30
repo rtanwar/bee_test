@@ -1,4 +1,4 @@
-var countryApp = angular.module('countryApp',['ngRoute','restangular','ui.bootstrap','ui.utils','ngCleanMask']);
+var countryApp = angular.module('countryApp',['ngRoute','restangular']);
 
 /**
 *Create route function 
@@ -6,7 +6,7 @@ var countryApp = angular.module('countryApp',['ngRoute','restangular','ui.bootst
 
 countryApp.config(function($routeProvider) {
 	$routeProvider
-	.when('/', {templateUrl: '/list.html',
+	.when('/', {templateUrl: 'list.html',
 		controller: 'countryController'
 	})
 	.when('/add', {
@@ -35,18 +35,16 @@ countryController = countryApp.controller('countryController',function($scope,$h
 {
 
 	$scope.headers = [
-	{ title: 'S.No.',       value: 'id' },
-	{ title: 'Bill No',       value: 'billno' },
-	{ title: 'Client', value: 'client' },
-	{ title: 'Bill Date',     value: 'billdate'},
-	{ title: 'Amount',     value: 'amount'},
-	{ title: 'Edit'},
-	{ title: 'Report'},
+	// { title: 'S.No.',       value: 'id' },
+	{ title: 'Country Name',       value: 'Name' },
+	{ title: 'Continent', value: 'Continent' },
+	{ title: 'Region',     value: 'Region'},
+	{ title: 'Population',     value: 'Population'},
+	{ title: 'Edit'},	
 	];
 	$scope.newdata = {};
 	$scope.search = {};
-	$scope.alert = {title: 'Holy guacamole!', content: 'Best check yo self, you\'re not looking too good.', type: 'info'};
-	
+	// $scope.alert = {title: 'Holy guacamole!', content: 'Best check yo self, you\'re not looking too good.', type: 'info'};
 	//intialize status of save button on details page 
 	
 	$scope.sortvalue= '=';
@@ -64,14 +62,18 @@ countryController = countryApp.controller('countryController',function($scope,$h
 	$scope.fetchResult = function () {
 		$scope.showloading = true;
 		$scope.insurers= {};
-		return Restangular.all('forms/bills_js/').getList($scope.search).then(function (data) {		
-			if (data.data) 
-			{
-				$scope.countries = data.data;
+
+		return Restangular.all('json/all').getList($scope.search).then(function (data) {		
+
+			if (data) 
+			{				
+				$scope.countries = data;
+				// console.log($scope.countries)
 				$scope.records_per_page=10;
 				$scope.numPages = (data.recordcount/$scope.records_per_page)-1;
 				$scope.recordcount = data.recordcount;		  
 				$scope.showloading = false;  	  
+
 			}
 		});	
 	};
@@ -88,19 +90,6 @@ $scope.selectPage = function(page) {
 } 
 	//$scope.$watch("search.searchText", function() {_.debounce(function() {$scope.selectPage(); console.log('changed')},100)}, true);
 	
-
-
-	function getone(id) {
-		Restangular.one('/json/', id).get().then(function(insurer) {
-			$scope.insurer=insurer;
-			console.debug(insurer);	
-		//alert($scope.contact.firstname);
-	});			
-	}	
-	
-	
-	
-
 	$scope.onSort = function (sortedBy, sortDir) {
 		console.debug(sortedBy) ;
 		console.debug(sortDir) ;
@@ -121,7 +110,10 @@ $scope.selectPage = function(page) {
 
 });
 
-
+countryApp.config(function(RestangularProvider) {
+ RestangularProvider.setRestangularFields({
+      id: "Id"  });
+})
 countryEditController = countryApp.controller('countryEditController',function($scope,$http,Restangular,$location, $routeParams,$route)
 {
 
@@ -133,50 +125,22 @@ countryEditController = countryApp.controller('countryEditController',function($
 	
 	$scope.tasksheaders = ['Task','Particulars', 'Rate','Qty','Amount',''];
 	data = [];
-	console.debug($routeParams.id);
+	
 	$scope.tasks_deleted = [];
 	if($routeParams.id)	
 	{
-		Restangular.one('/json/details', $route.current.params.id).get().then(function (data)
+		console.debug($routeParams.id);
+		Restangular.one('json', $route.current.params.id).get().then(function (data)
 			{$scope.country = data;
 		//$scope.clientname={"name":data.client,"id":data.clientid};
 		//$scope.clients = data.clients;delete $scope.bill.clients;
-		console.log($scope.clientname)
+		console.log($scope.country)
 	});	
 	}
 
 	$scope.deletedisabled=(typeof $route.current.params.id === 'undefined');	
 
 	 // if the id is not set means we are addding hence no delete	
-
-
-
-
-
-	 Restangular.all('/json/'+$route.current.params.id).getList().then(function (data) {		
-	 	if (data) 
-	 	{
-	 		$scope.tasks = data;
-	 		$scope.tasks_org = angular.copy(data);			  			  
-	 		$scope.showloading = false;
-	 	}
-	 });		
-
-	 $scope.getById = function(input, id) {		
-	 	var i=0, len=input.length;
-	 	for (; i<len; i++) {
-		  //convert both ids to numbers to be sure
-		  if (+input[i].id == +id) {
-		  	console.debug('found');
-
-		  	return input[i];
-		  }
-		}
-		return null;
-	}
-
-	
-	
 	
 
 	$scope.savecurrent = function(event){
@@ -194,13 +158,16 @@ countryEditController = countryApp.controller('countryEditController',function($
 		// delete  $scope.country.client;
 		// delete  $scope.bill.address;
 		// delete  $scope.bill.code;
-		if ($scope.country.id)
-			$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }]; 
+		console.log("Saving "+$scope.country.Id)	
+		if ($scope.country.Id)
+		{		
+			$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }];
 				$location.path('/')
 			});
+		}
 		else
 			//baseNames.post($scope.insurer).then(function(){$location.path('/')});
-		Restangular.all('/json').post($scope.country).then(function(data){
+		Restangular.all('json').post($scope.country).then(function(data){
 			$scope.country.id = data;
 			console.log(data);
 			$scope.alerts=[{ type: 'success', msg: 'Record Added!!' }];									
@@ -229,8 +196,7 @@ countryEditController = countryApp.controller('countryEditController',function($
 			});
 		}
 
-	
-	
+		
 		$scope.loading = function($event) {		
 			var $btn = $($event.target);
 			$btn.button('loading') ;

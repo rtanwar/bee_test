@@ -66,28 +66,28 @@
 			<div class="container">
 			<div class="row">
 			  <div class="hero-text">
-			    <h1>Welcome {{.user}}! to Beego Sample Application.</h1>
+			    <h1>Welcome <<<.user>>>! to Beego Sample Application.</h1>
 			    <p class="description">
 			    	Beego is a simple & powerful Go web framework which is inspired by tornado and sinatra.
 			    <br />
-			    	Official website: <a href="http://{{.Website}}">{{.Website}}</a>
+			    	Official website: <a href="http://<<<.Website>>>"><<<.Website>>></a>
 			    <br />
-			    	Contact me: {{.Email}}
+			    	Contact me: <<<.Email>>>
 			    </p>
-			    Here is <a href="/logout">Logout</a>
+			    <div> Here is <a href="/logout">Logout</a></div><br/> Here is <a href="/json">JSON</a>
 			    <br/>
 			    <form action="/" METHOD="POST">
 			    Search Country: <input name="country" value=""/>
 			    <input type="submit"/>
 			    </form>
-			    Searching {{.country}}
+			    Searching <<<.country>>>
 			    Countries:
 
-			    {{range $key, $val := .Countries}}
-			    <h3><a href= "/country/{{$val.Id}}" >{{$val.Name}}</a></h3>
-			    {{$key}}
-			    {{$val}}
-			    {{end}}
+			    <<<range $key, $val := .Countries>>>
+			    <h3><a href= "/country/<<<$val.Id>>>" ><<<$val.Name>>></a></h3>
+			    <<<$key>>>
+			    <<<$val>>>
+			    <<<end>>>
 
 
 			  </div>

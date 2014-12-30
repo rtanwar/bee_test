@@ -36,6 +36,14 @@ func init() {
 	orm.RegisterModel(new(Country))
 }
 
+func SaveCountry(new_c Country) int64 {
+	o := orm.NewOrm()
+	if num, err := o.Update(&new_c); err == nil {
+		return num
+	}
+	return 0
+}
+
 // GetAllCountry retrieves all Country matches certain condition. Returns empty list if
 // no records exist
 func GetAllCountry(search string) ([]*Country, error) {
