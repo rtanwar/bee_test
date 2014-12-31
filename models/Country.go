@@ -36,19 +36,19 @@ func init() {
 	orm.RegisterModel(new(Country))
 }
 
-func SaveCountry(new_c Country) int64 {
+func SaveCountry(new_c Country) (int64, error) {
 	o := orm.NewOrm()
 	var num int64
 	var err error
 	if num, err = o.Update(&new_c); err == nil && num > 0 {
-		return num
+		return num, nil
 	}
 	if num == 0 {
 		if num, err = o.Insert(&new_c); err == nil {
-			return num
+			return num, nil
 		}
 	}
-	return 0
+	return 0, err
 }
 
 // GetAllCountry retrieves all Country matches certain condition. Returns empty list if
