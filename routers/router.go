@@ -10,6 +10,7 @@ func init() {
 	beego.Router("/", &controllers.CountryController{}, "post,get:Get_countries")
 	beego.Router("/json", &controllers.CountryController{}, "post,get:Get_countries_json")
 	beego.Router("/json/:id:string", &controllers.CountryController{}, "post,get:Get_countries_json")
+	beego.Router("/json/:id:string", &controllers.CountryController{}, "delete:Delete_contry")
 
 	beego.Router("/country/:id:string", &controllers.CountryController{}, "get:Get_country")
 	// beego.Router("/login", &controllers.LoginController{})

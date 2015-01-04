@@ -44,6 +44,15 @@ func (c *CountryController) Get_country() {
 	}
 }
 
+func (c *CountryController) Delete_contry() {
+	c.Data["json"] = "{}"
+	country := c.Ctx.Input.Param(":id")
+	if len(country) != 0 {
+		models.DeleteCountry(country)
+	}
+	c.ServeJson()
+}
+
 func (c *CountryController) Get_countries_json() {
 
 	country := c.Ctx.Input.Param(":id")
@@ -59,8 +68,11 @@ func (c *CountryController) Get_countries_json() {
 		new_c := models.Country{}
 		json.Unmarshal(c.Ctx.Input.CopyBody(), &new_c)
 		fmt.Printf("Struct %s", new_c)
-		_, err := models.SaveCountry(new_c)
-		c.Data["json"] = err.Error()
+		insert := len(country) == 0
+		_, err := models.SaveCountry(new_c, insert)
+		if err != nil {
+			c.Data["json"] = err.Error()
+		}
 
 		c.ServeJson()
 
@@ -68,7 +80,7 @@ func (c *CountryController) Get_countries_json() {
 		//
 	} else {
 		var cdetail interface{}
-		if country != "" {
+		if len(country) != 0 {
 			if strings.ToUpper(country) == "ALL" {
 				fmt.Println("ALL DATA")
 				cdetail, err = models.GetAllCountry("")

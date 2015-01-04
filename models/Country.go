@@ -36,15 +36,25 @@ func init() {
 	orm.RegisterModel(new(Country))
 }
 
-func SaveCountry(new_c Country) (int64, error) {
+func DeleteCountry(c string) (int64, error) {
+	o := orm.NewOrm()
+	if num, err := o.Delete(&Country{Id: c}); err == nil {
+		return num, nil
+	} else {
+		return 0, err
+	}
+}
+
+func SaveCountry(new_c Country, insert bool) (int64, error) {
 	o := orm.NewOrm()
 	var num int64
 	var err error
-	if num, err = o.Update(&new_c); err == nil && num > 0 {
-		return num, nil
-	}
-	if num == 0 {
+	if insert {
 		if num, err = o.Insert(&new_c); err == nil {
+			return num, nil
+		}
+	} else {
+		if num, err = o.Update(&new_c); err == nil && num > 0 {
 			return num, nil
 		}
 	}

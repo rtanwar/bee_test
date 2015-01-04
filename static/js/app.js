@@ -144,6 +144,9 @@ countryEditController = countryApp.controller('countryEditController',function($
 
 	 // if the id is not set means we are addding hence no delete	
 	
+	 $scope.go = function(path){
+	 	$location.path(path);
+	 }
 
 	$scope.savecurrent = function(event){
 		//console.log(event.target.button('what'));	
@@ -162,20 +165,24 @@ countryEditController = countryApp.controller('countryEditController',function($
 		// delete  $scope.bill.code;
 		console.log("Saving "+$scope.country.Id)	
 		// if ($scope.country.Id)
-		// {		
-		// 	$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }];
-		// 		$location.path('/')
-		// 	});
-		// }
-		// else
+		console.debug($routeParams.id)
+		if ($routeParams.id)
+		{		
+			$scope.country.post().then(function(){$scope.alerts=[{ type: 'success', msg: 'Record Saved!!' }];
+				$location.path('/')
+			});
+		}
+		else
 			//baseNames.post($scope.insurer).then(function(){$location.path('/')});
-		Restangular.all('json').post($scope.country).then(function(data){
+		{
+			Restangular.all('json').post($scope.country).then(function(data){
 			$scope.country.id = data;
 			console.log(data);
 			$scope.alerts=[{ type: 'success', msg: 'Record Added!!' }];									
 			// $location.path('/edit/'+$scope.country.id);				      				
 			$location.path('/');				      				
 		});
+		}
 	}
 	else
 	{			
@@ -187,7 +194,7 @@ countryEditController = countryApp.controller('countryEditController',function($
 	
 
 		$scope.deletecurrent = function(){				
-			$scope.country.post('DELETE').then(function(){$scope.alerts=[{ type: 'danger', msg: 'Record Deleted!!' }];
+			$scope.country.remove().then(function(){$scope.alerts=[{ type: 'danger', msg: 'Record Deleted!!' }];
 				$location.path('/')});
 		}
 
