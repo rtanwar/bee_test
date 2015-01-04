@@ -1,0 +1,16 @@
+{
+	"ImportPath": "github.com/rtanwar/bee_test",
+	"GoVersion": "go1.4",
+	"Deps": [
+		{
+			"ImportPath": "github.com/astaxie/beego",
+			"Comment": "v1.4.2",
+			"Rev": "07c628c7e9f813efc3f7e1785f667e08f2340d53"
+		},
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.2-31-g04cf947",
+			"Rev": "04cf9477603ac3191c3712cb0a03d1719d83759f"
+		}
+	]
+}
