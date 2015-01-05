@@ -1,4 +1,4 @@
-var countryApp = angular.module('countryApp',['ngRoute','restangular']);
+var countryApp = angular.module('countryApp',['ngRoute','restangular','ui.bootstrap']);
 
 /**
 *Create route function 
@@ -158,7 +158,7 @@ countryEditController = countryApp.controller('countryEditController',function($
 		if ($scope.myForm.$valid)
 		{		
 			var $btn = $(event.target);	
-			$btn.button('loading') ;		
+			$btn.button('loading');		
 		//$scope.bill.clientid = $scope.clientname.id;
 		// delete  $scope.country.client;
 		// delete  $scope.bill.address;
@@ -181,14 +181,23 @@ countryEditController = countryApp.controller('countryEditController',function($
 			$scope.alerts=[{ type: 'success', msg: 'Record Added!!' }];									
 			// $location.path('/edit/'+$scope.country.id);				      				
 			$location.path('/');				      				
-		});
+		}, function(data){console.log(data);
+			$scope.alerts=[{ type: 'danger', msg: data.data}];			
+			$btn.button('reset');			
+			});
 		}
 	}
 	else
 	{			
 			// $scope.alert={ type: 'danger', msg: 'Record Deleted!!' };			
 			// event.preventDefault();
-			$scope.alerts = [{ type: 'warning', msg: 'Please fill out the form correctly!!' }];
+			$scope.alerts = [];
+			angular.forEach($scope.myForm.$error.required,
+			function(e,i){console.log (e)
+			$scope.alerts.push ({ type: 'warning', msg: 'Field '+e.$name + ' has error!' });
+			})
+			
+			// $scope.alerts = [{ type: 'warning', msg: 'Please fill out the form correctly!!' }];
 		}		
 	}	
 	

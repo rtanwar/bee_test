@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	_ "github.com/astaxie/beego"
+	"github.com/astaxie/beego/validation"
 	"github.com/rtanwar/bee_test/models"
+	"log"
 	"strings"
 )
 
@@ -60,13 +62,27 @@ func (c *CountryController) Get_countries_json() {
 	c.Data["user"] = c.user
 	c.Data["json"] = "{}"
 	var err error
+	var str_err string
 	// country := c.GetString("id")
 
 	if c.Ctx.Input.IsPost() {
 		// jsoninfo := c.GetString("jsoninfo")
-		// fmt.Printf("JSON %s", c.Ctx.Input.CopyBody())
+		fmt.Printf("JSON %s", c.Ctx.Input.CopyBody())
 		new_c := models.Country{}
 		json.Unmarshal(c.Ctx.Input.CopyBody(), &new_c)
+		valid := validation.Validation{}
+		valid.Required(new_c.Id, "Id")
+		if valid.HasErrors() {
+			for _, err := range valid.Errors {
+				log.Println(err.Key, err.Message)
+				str_err += err.Key + ": " + err.Message + "\n"
+			}
+			c.CustomAbort(500, str_err)
+			// c.Data["json"] = str_err
+			// c.ServeJson()
+			return
+			// c.Data["json"] = validationerr
+		}
 		fmt.Printf("Struct %s", new_c)
 		insert := len(country) == 0
 		_, err := models.SaveCountry(new_c, insert)

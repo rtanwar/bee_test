@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="/static/js/angular-route.min.js"></script>
 	<script type="text/javascript" src="/static/js/restangular.js"></script>
 	<script type="text/javascript" src="/static/js/angular-ui.js"></script>	
+	<script type="text/javascript" src="/static/js/ui-bootstrap-tpls-0.11.2.js"></script>	
 	<script type="text/javascript" src="/static/js/app.js"></script>	
 
 
@@ -21,6 +22,7 @@
 	<header class="hero-unit" style="color:black;background-color:#A9F16C">
 		<div ng-app="countryApp" class="container"> 
 			<script type="text/ng-template" id="list.html">
+				<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 				<div class="controls">          
 						<button id="button4id" data-loading-text="Loading..." ng-click="add_new()" name="button4id" class="btn btn-success">Add New</button>
 				</div>
@@ -44,6 +46,7 @@
 				</script>
 
 				<script type="text/ng-template" id="/detail.html">
+					<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 					<legend>Country</legend>
 
 					<form autocomplete="off" id="myForm" name="myForm" class="form-horizontal" role="form">
@@ -51,7 +54,7 @@
 							<div class="form-group">              
 								<label class="col-sm-2 control-label" for ="Id">Id</label>
 								<div class="col-sm-3 ">
-									<input  id="Id" name="Id" size=30 ng-model="country.Id"  class="form-control input-sm">              
+									<input required="required"  id="Id" name="Id" size=30 ng-model="country.Id"  class="form-control input-sm">              
 								</div>
 								<label class="col-sm-2 control-label" for ="name">Name</label>
 								<div class="col-sm-3 ">
