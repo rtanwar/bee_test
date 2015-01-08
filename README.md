@@ -29,4 +29,5 @@ password:demo
 * display JSON result - DONE 
 * display static page with JS& CSS - DONE
 * use Angular - DONE
-* 
+* Upload file and parse into DB
+* User different DB
