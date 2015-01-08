@@ -20,7 +20,7 @@ func init() {
 
 // TestMain is a sample to run an endpoint test
 func TestMain(t *testing.T) {
-	r, _ := http.NewRequest("GET", "/", nil)
+	r, _ := http.NewRequest("GET", "/login", nil)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
 
