@@ -44,8 +44,9 @@
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
-            Hellow <<<.identity>>>
+            <div class="modal-footer" style="color:red">
+            <<<.message>>>
+            <!-- Hellow <<<.identity>>> -->
             </div>
           </div>
         </div>

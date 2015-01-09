@@ -31,11 +31,11 @@ func (c *LoginController) Post() {
 	// c.Data["Website"] = "beego.me"
 	// c.Data["email"] = "astaxie@gmail.com"
 	c.Data["identity"] = identity
-	c.Data["password"] = password
-	users, _ := models.GetAllUserGroups("")
-	fmt.Printf("%s", users)
-	fmt.Printf("Login POST %s %s", identity, password)
-	if (identity == "demo") && (password == "demo") {
+	// c.Data["password"] = password
+	// fmt.Printf("Login POST %s %s", identity, password)
+
+	if models.CheckUser(identity, password) {
+		// if (identity == "demo") && (password == "demo") {
 		m := make(map[string]interface{})
 		//   	m["company"] = a.Company
 		m["user"] = identity
@@ -46,6 +46,7 @@ func (c *LoginController) Post() {
 		// UserName = identity
 		c.Ctx.Redirect(302, "/")
 	}
+	c.Data["message"] = "Invalid combination!!"
 	c.TplNames = "auth/login.tpl"
 	// this.Ctx.Redirect(302, "/admin/index")
 }
