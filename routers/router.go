@@ -16,6 +16,7 @@ func init() {
 	// beego.Router("/login", &controllers.LoginController{})
 	// beego.Router("/login", &controllers.LoginController{}, "get:Get;post:Post")
 	beego.Router("/login", &controllers.LoginController{}, "get:Get;post:Post")
+	beego.Router("/register", &controllers.LoginController{}, "get:Register;post:Register")
 	beego.Router("/logout", &controllers.LoginController{}, "get:LogOut")
 	// beego.InsertFilter("/*", beego.BeforeRouter, controllers.FilterUser)
 	// beego.InsertFilter("*", beego.BeforeRouter, auth.Basic("username", "secretpassword"))

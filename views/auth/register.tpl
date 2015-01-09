@@ -38,6 +38,10 @@
                 <span class="input-group-addon glyphicon glyphicon-lock"></span>
                   <input type="password" id="password"  name="password" class="form-control input-lg" placeholder="Password">
                 </div>
+                <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                  <input type="password" id="passwordre"  name="passwordre" class="form-control input-lg" placeholder="Retype Password">
+                </div>
                 <div class="form-group">
                   <button class="btn btn-primary btn-lg btn-block">Sign In</button>
                   <span class="pull-right"><a href="#">Register</a></span><span><a href="/login/forgot_password">Need help?</a></span>
@@ -45,7 +49,7 @@
               </form>
             </div>
             <div class="modal-footer" style="color:red">
-            <<<.message>>>
+            <<<str2html .message>>>
             <!-- Hellow <<<.identity>>> -->
             </div>
           </div>

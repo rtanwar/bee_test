@@ -3,7 +3,9 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/validation"
 	"github.com/rtanwar/bee_test/models"
+	"github.com/rtanwar/bee_test/utils"
 )
 
 type LoginController struct {
@@ -22,6 +24,42 @@ func (c *LoginController) Get() {
 	}
 
 	// jsoninfo := c.GetString("jsoninfo")
+}
+
+func (this *LoginController) Register() {
+	username := this.GetString("identity")
+	password := this.GetString("password")
+	passwordre := this.GetString("passwordre")
+	test := models.RegisterForm{Username: username, Password: password, PasswordRe: passwordre}
+	valid := validation.Validation{}
+	b, err := valid.Valid(&test)
+
+	if err != nil {
+
+	}
+	if !b {
+		m := ""
+		for _, err := range valid.Errors {
+			fmt.Println(err.Key, err.Message)
+			m += "<br>" + err.Key + ":" + err.Message
+		}
+		this.Data["message"] = m
+	} else {
+		salt := utils.GetRandomString(10)
+		encodedPwd := salt + "$" + utils.EncodePassword(password, salt)
+
+		user := new(models.Users)
+		user.Username = username
+		user.Password = encodedPwd
+		user.Salt = salt
+		user.Email = username
+		models.AddUsers(user)
+		// o.Insert(user)
+
+		this.Redirect("/", 302)
+	}
+	fmt.Printf("%s", this.Data["message"])
+	this.TplNames = "auth/register.tpl"
 }
 
 func (c *LoginController) Post() {

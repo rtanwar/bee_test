@@ -43,6 +43,7 @@ func noCheckUrl(lowerUrl string) bool {
 	// flag = flag || strings.Contains(lowerUrl, "/admin/loginout")
 	// flag = flag || lowerUrl == "/admin"
 
-	flag = lowerUrl == "/login"
+	flag = flag || lowerUrl == "/login"
+	flag = flag || lowerUrl == "/register"
 	return flag
 }

@@ -51,11 +51,10 @@ func CheckUser(identity string, password string) bool {
 	u = &Users{Username: identity}
 	err = o.Read(u)
 
-	salt := u.Salt //utils.GetRandomString(10)
-	encodedPwd := salt + "$" + utils.EncodePassword(password, salt)
-	fmt.Printf("\nsalt: %s\npassword: %s", salt, encodedPwd)
-
 	if err = o.Read(u, "Username"); err == nil {
+		salt := u.Salt //utils.GetRandomString(10)
+		encodedPwd := salt + "$" + utils.EncodePassword(password, salt)
+		fmt.Printf("\nsalt: %s\npassword: %s", salt, encodedPwd)
 		if (u.Username == identity) && (u.Password == encodedPwd) {
 			return true
 		}
