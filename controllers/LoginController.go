@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"github.com/astaxie/beego"
+	"github.com/rtanwar/bee_test/models"
 )
 
 type LoginController struct {
@@ -31,7 +32,8 @@ func (c *LoginController) Post() {
 	// c.Data["email"] = "astaxie@gmail.com"
 	c.Data["identity"] = identity
 	c.Data["password"] = password
-
+	users, _ := models.GetAllUserGroups("")
+	fmt.Printf("%s", users)
 	fmt.Printf("Login POST %s %s", identity, password)
 	if (identity == "demo") && (password == "demo") {
 		m := make(map[string]interface{})

@@ -20,8 +20,10 @@ func (c *MainController) Prepare() {
 	fmt.Println("CONTROLLER PREPARE")
 	sess := c.GetSession(sessionName)
 	fmt.Printf("Session %s", sess)
-	m := sess.(map[string]interface{})
-	c.user = m["user"]
+	if sess != nil {
+		m := sess.(map[string]interface{})
+		c.user = m["user"]
+	}
 	//    c.Data["Username"] = m["company"]
 	//c.user = c.GetSession(sessionName)
 }

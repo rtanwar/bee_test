@@ -15,15 +15,19 @@ import (
 */
 var sessionName = beego.AppConfig.String("SessionName")
 var FilterUser = func(ctx *context.Context) {
-	UserName := ctx.Input.Session(sessionName)
+	sess := ctx.Input.Session(sessionName)
+
+	// UserName := ctx.Input.Session(sessionName)
 	// fmt.Print("Session %s", v)
 	// beego.Info("Session %s", v)
 	var lowerUrl string = strings.ToLower(ctx.Request.RequestURI)
 	// fmt.Println(lowerUrl)
 	// if strings.Contains(lowerUrl, "/login")
-	if UserName == nil && !noCheckUrl(lowerUrl) {
+	if sess == nil && !noCheckUrl(lowerUrl) {
 		ctx.Redirect(302, "/login")
 	}
+	// m := sess.(map[string]interface{})
+	// UserName := m["user"]
 	// if userId == 0 && strings.Contains(lowerUrl, "/admin") {
 	// 	if !noCheckUrl(lowerUrl) {
 	// 		ctx.Redirect(301, "/admin/loginout")
