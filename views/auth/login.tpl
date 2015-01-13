@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                   <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-                  <span class="pull-right"><a href="#">Register</a></span><span><a href="/login/forgot_password">Need help?</a></span>
+                  <span class="pull-right"><a href="/register">Register</a></span><span><a href="/login/forgot_password">Need help?</a></span>
                 </div>
               </form>
             </div>

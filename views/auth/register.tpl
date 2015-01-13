@@ -14,7 +14,7 @@
 
       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
-      <title>Login Page</title>    
+      <title>New User Registeration</title>    
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -26,7 +26,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
           <div class="modal-header">              
-              <h1 class="text-center">Login</h1>
+              <h1 class="text-center">New User Registeration</h1>
             </div>
             <div class="modal-body">            
               <form action="" method="post" class="form col-md-12 center-block">
@@ -43,8 +43,8 @@
                   <input type="password" id="passwordre"  name="passwordre" class="form-control input-lg" placeholder="Retype Password">
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-primary btn-lg btn-block">Sign In</button>
-                  <span class="pull-right"><a href="#">Register</a></span><span><a href="/login/forgot_password">Need help?</a></span>
+                  <button class="btn btn-primary btn-lg btn-block">Sign Up</button>
+                  
                 </div>
               </form>
             </div>

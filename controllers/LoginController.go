@@ -27,38 +27,39 @@ func (c *LoginController) Get() {
 }
 
 func (this *LoginController) Register() {
-	username := this.GetString("identity")
-	password := this.GetString("password")
-	passwordre := this.GetString("passwordre")
-	test := models.RegisterForm{Username: username, Password: password, PasswordRe: passwordre}
-	valid := validation.Validation{}
-	b, err := valid.Valid(&test)
+	this.Data["message"] = ""
+	if this.Ctx.Request.Method == "POST" {
+		username := this.GetString("identity")
+		password := this.GetString("password")
+		passwordre := this.GetString("passwordre")
+		test := models.RegisterForm{Username: username, Password: password, PasswordRe: passwordre}
+		valid := validation.Validation{}
+		b, err := valid.Valid(&test)
+		// if err != nil {
+		// }
+		if !b {
+			m := ""
+			for _, err := range valid.Errors {
+				fmt.Println(err.Key, err.Message)
+				m += "<br>" + err.Key + ":" + err.Message
+			}
+			this.Data["message"] = m
+		} else {
+			salt := utils.GetRandomString(10)
+			encodedPwd := salt + "$" + utils.EncodePassword(password, salt)
 
-	if err != nil {
+			user := new(models.Users)
+			user.Username = username
+			user.Password = encodedPwd
+			user.Salt = salt
+			user.Email = username
+			models.AddUsers(user)
+			// o.Insert(user)
 
-	}
-	if !b {
-		m := ""
-		for _, err := range valid.Errors {
-			fmt.Println(err.Key, err.Message)
-			m += "<br>" + err.Key + ":" + err.Message
+			this.Redirect("/", 302)
 		}
-		this.Data["message"] = m
-	} else {
-		salt := utils.GetRandomString(10)
-		encodedPwd := salt + "$" + utils.EncodePassword(password, salt)
-
-		user := new(models.Users)
-		user.Username = username
-		user.Password = encodedPwd
-		user.Salt = salt
-		user.Email = username
-		models.AddUsers(user)
-		// o.Insert(user)
-
-		this.Redirect("/", 302)
+		fmt.Printf("%s", this.Data["message"])
 	}
-	fmt.Printf("%s", this.Data["message"])
 	this.TplNames = "auth/register.tpl"
 }
 

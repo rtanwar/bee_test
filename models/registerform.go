@@ -5,7 +5,7 @@ import (
 )
 
 type RegisterForm struct {
-	Username   string `valid:"AlphaNumeric"`
+	Username   string `valid:"Required;AlphaNumeric"`
 	Password   string `form:"type(password)" valid:"Required;MinSize(4);MaxSize(30)"`
 	PasswordRe string `form:"type(password)" valid:"Required;MinSize(4);MaxSize(30)"`
 }
