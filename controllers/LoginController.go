@@ -34,7 +34,7 @@ func (this *LoginController) Register() {
 		passwordre := this.GetString("passwordre")
 		test := models.RegisterForm{Username: username, Password: password, PasswordRe: passwordre}
 		valid := validation.Validation{}
-		b, err := valid.Valid(&test)
+		b, _ := valid.Valid(&test)
 		// if err != nil {
 		// }
 		if !b {
